@@ -39,7 +39,7 @@ List<Product> products = new List<Product>() {
     new Product() {
         Name = "Golf Putter",
         Price = 3.50M,
-        SoldOnDate = new DateTime(2024, 04, 07),
+        SoldOnDate = null,
         StockDate = new DateTime(2024, 03, 17),
         ManufactureYear = 2018,
         Condition = 1.5
@@ -51,6 +51,14 @@ List<Product> products = new List<Product>() {
         StockDate = new DateTime(2024, 03, 28),
         ManufactureYear = 2020,
         Condition = 4.2
+    },
+    new Product() {
+        Name = "Soccer Ball",
+        Price = 19.99M,
+        SoldOnDate = new DateTime(2024, 04, 07),
+        StockDate = new DateTime(2024, 04, 03),
+        ManufactureYear = 2022,
+        Condition = 4.6
     }
 };
 
@@ -130,19 +138,11 @@ void ListProducts() {
 }
 
 void ViewLatestProducts() {
-    // Create a new empty List to store the latest Products
-    List<Product> latestProducts = new List<Product>();
-
     // Calculate a DateTime 90 days in the past
     DateTime threeMonthsAgo = DateTime.Now - TimeSpan.FromDays(90);
 
-    // Loop through the products
-    foreach (Product product in products) {
-        // Add a product to latestProducts if it fits the criteria
-        if (product.StockDate > threeMonthsAgo && product.SoldOnDate == null) {
-            latestProducts.Add(product);
-        }
-    }
+    // Create list of products that meet the criteria
+    List<Product> latestProducts = products.Where(product => product.StockDate > threeMonthsAgo && product.SoldOnDate == null).ToList();
 
     // Print out the latest products to the console
     for (int i = 0; i < latestProducts.Count; i++) {
