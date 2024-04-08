@@ -116,18 +116,14 @@ void ViewProductDetails() {
 
 
 void ListProducts() {
-    decimal totalValue = 0.0M;
-    foreach (Product product in products) {
-        if (product.SoldOnDate == null) {
-            totalValue += product.Price;
-        }
-    }
+    List<Product> foundProducts = products.Where(product => product.SoldOnDate == null).ToList();
+    decimal totalValue = foundProducts.Sum(product => product.Price);
 
 
     Console.WriteLine($"Total inventory value: ${totalValue}");
     Console.WriteLine("Products:");
 
-    
+
     for (int i = 0; i < products.Count; i++) {
         Console.WriteLine($"{i + 1}. {products[i].Name}");
     }
