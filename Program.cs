@@ -109,7 +109,6 @@ void ViewProductDetails() {
     }
 
 
-    // TimeSpan timeInStock = DateTime.Now - chosenProduct.StockDate;
     Console.WriteLine(@$"You chose: {chosenProduct.Name}, which costs {chosenProduct.Price} dollars.
     It is {DateTime.Now.Year - chosenProduct.ManufactureYear} years old, with a quality rating of {chosenProduct.Condition}.
     It {(chosenProduct.SoldOnDate ==  null ? "is not available." : $"has been in stock for {chosenProduct.TimeInStock.Days} days.")}");
@@ -123,8 +122,12 @@ void ListProducts() {
             totalValue += product.Price;
         }
     }
+
+
     Console.WriteLine($"Total inventory value: ${totalValue}");
     Console.WriteLine("Products:");
+
+    
     for (int i = 0; i < products.Count; i++) {
         Console.WriteLine($"{i + 1}. {products[i].Name}");
     }
