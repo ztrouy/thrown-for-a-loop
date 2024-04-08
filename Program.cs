@@ -7,7 +7,7 @@ List<Product> products = new List<Product>() {
     new Product() {
         Name = "Football",
         Price = 15.25M,
-        Sold = false,
+        SoldOnDate = null,
         StockDate = new DateTime(2023, 09, 21),
         ManufactureYear = 2010,
         Condition = 3.7
@@ -15,7 +15,7 @@ List<Product> products = new List<Product>() {
     new Product() {
         Name = "Hockey Stick",
         Price = 12.99M,
-        Sold = false,
+        SoldOnDate = null,
         StockDate = new DateTime(2023, 10, 07),
         ManufactureYear = 2012,
         Condition = 4.6
@@ -23,7 +23,7 @@ List<Product> products = new List<Product>() {
     new Product() {
         Name = "Boomerang",
         Price = 9.95M,
-        Sold = true,
+        SoldOnDate = null,
         StockDate = new DateTime(2023, 12, 18),
         ManufactureYear = 2014,
         Condition = 3.2
@@ -31,7 +31,7 @@ List<Product> products = new List<Product>() {
     new Product() {
         Name = "Frisbee",
         Price = 6.79M,
-        Sold = false,
+        SoldOnDate = null,
         StockDate = new DateTime(2024, 01, 09),
         ManufactureYear = 2016,
         Condition = 2.9
@@ -39,7 +39,7 @@ List<Product> products = new List<Product>() {
     new Product() {
         Name = "Golf Putter",
         Price = 3.50M,
-        Sold = true,
+        SoldOnDate = new DateTime(2024, 04, 07),
         StockDate = new DateTime(2024, 03, 17),
         ManufactureYear = 2018,
         Condition = 1.5
@@ -47,7 +47,7 @@ List<Product> products = new List<Product>() {
     new Product() {
         Name = "Corn Hole Set",
         Price = 59.99M,
-        Sold = false,
+        SoldOnDate = null,
         StockDate = new DateTime(2024, 03, 28),
         ManufactureYear = 2020,
         Condition = 4.2
