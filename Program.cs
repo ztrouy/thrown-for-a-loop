@@ -105,17 +105,17 @@ void ViewProductDetails() {
     }
 
 
-    TimeSpan timeInStock = DateTime.Now - chosenProduct.StockDate;
+    // TimeSpan timeInStock = DateTime.Now - chosenProduct.StockDate;
     Console.WriteLine(@$"You chose: {chosenProduct.Name}, which costs {chosenProduct.Price} dollars.
     It is {DateTime.Now.Year - chosenProduct.ManufactureYear} years old, with a quality rating of {chosenProduct.Condition}.
-    It {(chosenProduct.Sold ? "is not available." : $"has been in stock for {timeInStock.Days} days.")}");
+    It {(chosenProduct.SoldOnDate ==  null ? "is not available." : $"has been in stock for {chosenProduct.TimeInStock.Days} days.")}");
 }
 
 
 void ListProducts() {
     decimal totalValue = 0.0M;
     foreach (Product product in products) {
-        if (!product.Sold) {
+        if (product.SoldOnDate == null) {
             totalValue += product.Price;
         }
     }
@@ -136,7 +136,7 @@ void ViewLatestProducts() {
     // Loop through the products
     foreach (Product product in products) {
         // Add a product to latestProducts if it fits the criteria
-        if (product.StockDate > threeMonthsAgo && !product.Sold) {
+        if (product.StockDate > threeMonthsAgo && product.SoldOnDate == null) {
             latestProducts.Add(product);
         }
     }
