@@ -47,7 +47,7 @@ List<Product> products = new List<Product>() {
     new Product() {
         Name = "Corn Hole Set",
         Price = 59.99M,
-        SoldOnDate = null,
+        SoldOnDate = new DateTime(2024, 04, 08),
         StockDate = new DateTime(2024, 03, 28),
         ManufactureYear = 2020,
         Condition = 4.2
@@ -64,6 +64,7 @@ while (choice != "0") {
         1. View All Products
         2. View Product Details
         3. View Latest Products
+        4. View Monthly Report
     ");
     choice = Console.ReadLine()!;
     if (choice == "0") {
@@ -77,6 +78,9 @@ while (choice != "0") {
     }
     else if (choice == "3") {
         ViewLatestProducts();
+    }
+    else if (choice == "4") {
+        MonthlySalesReport();
     }
 }
 
@@ -145,4 +149,61 @@ void ViewLatestProducts() {
     for (int i = 0; i < latestProducts.Count; i++) {
         Console.WriteLine($"{i + 1}. {latestProducts[i].Name}");
     }
+}
+
+void MonthlySalesReport() 
+{
+    int chosenMonth = 0;
+    int chosenYear = 0;
+    DateTime chosenDate = new DateTime();
+
+    while (chosenMonth == 0)
+    {
+        try
+        {
+            Console.WriteLine("Month:");
+            chosenMonth = int.Parse(Console.ReadLine()!.Trim());
+            chosenDate = new DateTime(0001, chosenMonth, 1);
+        }
+        catch (ArgumentOutOfRangeException)
+        {
+            Console.WriteLine("Please choose a valid month!");
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine("Please input an integer!");
+        }
+        catch (Exception ex) {
+            Console.WriteLine(ex);
+            Console.WriteLine("Something went wrong, please try again!");
+        }
+    }
+
+    while (chosenYear == 0)
+    {
+        try
+        {
+            Console.WriteLine("Year:");
+            chosenYear = int.Parse(Console.ReadLine()!.Trim());
+            chosenDate = new DateTime(chosenYear, chosenMonth, 1);
+        }
+        catch (ArgumentOutOfRangeException)
+        {
+            Console.WriteLine("Please choose a valid Year!");
+        }
+        catch (FormatException)
+        {
+            Console.WriteLine("Please input an integer!");
+        }
+        catch (Exception ex) {
+            Console.WriteLine(ex);
+            Console.WriteLine("Something went wrong, please try again!");
+        }
+    }
+
+    List<Product> foundProducts = products.Where(product => product.SoldOnDate?.Month == chosenMonth & product.SoldOnDate?.Year == chosenYear).ToList();
+
+    decimal totalSum = foundProducts.Sum(product => product.Price);
+
+    Console.WriteLine($"Total Revenue for {chosenDate.ToString("MMMM yyyy")}: ${totalSum}");
 }
